@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react';
 
 function Shop() {
     
-    useEffect(()=>{
+    useEffect(() => {
         fetchItems();
-    },[])
+    }, [])
     
+    const [items, setItems] = useState([])
     const fetchItems = async () => {
         const authorization = 'cce5347fda424f658c7f32073ec8e231';
         const data = await fetch('https://fortnite-api.theapinetwork.com/items/popular',{
@@ -14,12 +15,15 @@ function Shop() {
                 'Authorization': authorization
             },
         });
-        const items = await data.json()
-        console.log(items)
+        const items = await data.json();
+        console.log(items.entries)
+        setItems(items.entries);
     }
     return(
         <div>
-            <h2>Shop</h2>
+            {items.map( (item,index) =>(
+                <h2 key={index}>{item.name}</h2>
+            ))}
         </div>
     )
 }

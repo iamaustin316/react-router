@@ -16,7 +16,6 @@ function Shop() {
             },
         });
         const items = await data.json();
-        console.log(items.entries)
         setItems(items.entries);
     }
     return(
